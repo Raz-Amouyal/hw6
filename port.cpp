@@ -49,14 +49,15 @@ bool Port::match(const GenericString &packet) const{
 
     //step 2 : split by "," and "=" to pktArr ; pktArr[i] contain type or data
     StringArray pktArr = input.split(",=");
+    int n = pktArr.size();
 
     //step 3 : trim all pktArr elements
-    for (int i = 0 ; i < N ; ++i) {
+    for (int i = 0 ; i < n ; ++i) {
         pktArr[i].trim();
     }
 
     //step 4 : find the element of the rule by comp pktArr[0,2,4,6] to rule type
-    for (int i = 0; i < N ; i += 2) {
+    for (int i = 0; i < n ; i += 2) {
         if (pktArr[i].str() == type ){
             rule = i+1;
         }

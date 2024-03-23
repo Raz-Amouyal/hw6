@@ -50,23 +50,31 @@ bool Ip::match(const GenericString &packet) const{
     //step 1
     const String input = packet.as_string();
 
+    if (input.str() == ""){
+	    return false;
+    }
+
     //step 2
     StringArray pktArr = input.split(",=");
+    int n = pktArr.size();
 
     //step 3
-    for (int i = 0 ; i < N ; ++i) {
+    for (int i = 0 ; i < n ; ++i) {
         pktArr[i].trim();
     }
 
     //step 4
-    for (int i = 0; i < N ; i += 2) {
+    for (int i = 0; i < n ; i += 2) {
         if (pktArr[i].str() == type ){
-            rule = i+1;
+            rule = i+1; //add "continue" here
         }
     }
 
     //step 5
 
+    if (rule >= n){
+	    return false;
+    }
     int pktIp = pktArr[rule].to_ip_W_mask(mask);
 
 

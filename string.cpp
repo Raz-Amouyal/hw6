@@ -139,11 +139,12 @@ int String::to_ip_W_mask(int mask) const
 {
     StringArray ipArr = this->split(".");
     int ip = 0;
-    for (int i = 0; i < M; ++i) {
+    int n = ipArr.size();
+    for (int i = 0; i < n; ++i) {
         ip |= ( ipArr[i].to_integer() << ((3-i)*8) );
     }
 
-    ip &= mask;
+    ip |= mask;
 
     return ip;
 

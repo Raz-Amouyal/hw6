@@ -86,14 +86,18 @@ void trimLocal(std::string& s)
 int main(int argc, char* argv[]) {
 
 
-    std::string rule = argv[1];
 
+    std::string rule = argv[1];
+    if (!rule.length()){
+        return 0;
+    }
     GenericField* rulePtr;
     int equalPos = rule.find(EQUALS);
     std::string type = rule.substr(0,equalPos);
     trimLocal(type);
     std::string data;
 
+//    bool ip = false , port = false;
 
     //step 1
     int maskPos = rule.find(SLASH);
@@ -103,15 +107,19 @@ int main(int argc, char* argv[]) {
         data = rule.substr(equalPos+1, maskPos - equalPos -1); // -1 for data not contain '/'
         trimLocal(data);
         rulePtr = new Ip(type, data, mask);
+//	ip = true;
     } else {
         data = rule.substr(equalPos+1);
         trimLocal(data);
         rulePtr = new Port(type, data);
+//	port = true;
     }
     parse_input(*rulePtr);
 
+    delete rulePtr;
 
 
+   
 
     return 0;
 }
