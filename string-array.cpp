@@ -5,7 +5,7 @@
 #include "string.h"
 #include <stdexcept>
 #include <iostream>
-#include <cstddef>
+
 
 StringArray::StringArray() {}
 
