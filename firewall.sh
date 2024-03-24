@@ -42,8 +42,8 @@ done <<< "$rules"
 
 #output=$(printf "%s\n" "${matchs[@]}")
 
-sorted=$(echo "$matchs" | sort | uniq | sed -e 's/ //g' -e '/^ *$/d')
-
+sorted=$(echo "$matchs" | sort | uniq )
+#| sed -e 's/ //g' -e '/^ *$/d'
 echo "$sorted"
 
 
