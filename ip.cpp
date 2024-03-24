@@ -48,9 +48,11 @@ bool Ip::match(const GenericString &packet) const{
     int rule = 0;
 
     //step 1
-    const String input = packet.as_string();
+    String tmp = packet.as_string();
 
-    if (input.str() == ""){
+    const String input = tmp.trim();
+
+    if (!input.str().length()){
 	    return false;
     }
 

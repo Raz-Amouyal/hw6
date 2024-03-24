@@ -6,33 +6,45 @@ if [[ $# -ne 1 ]]; then
 fi
 
 rules_file="$1"
-
-if [[ -e $rules_file ]]; then
+#echo "$rules_file"
+if [[ ! -e $PWD/$rules_file ]]; then
 	echo "rules file not found!" >&2
 	exit 1
 fi
 
-packets=$(cat)
+temp=$(cat)
+#echo "$temp"
+packets=$(echo "$temp" | sed -e 's/#.*$//' -e '/^ *$/d')
+#echo -e "\n\n~~~~~PACKETS~~~~~~~\n\n\n$packets"
 
-rules=$(sed -e 's/#.*//' -e '/^$/d' $rules_file)
-
-matchs=()
+rules=$(sed -e 's/#.*//' -e '/^ *$/d' "$rules_file")
+#echo -e "\n\n~~~~~PACKETS~~~~~~~\n\n\nRULES\n\n$rules"
+matchs=""
 
 while IFS= read -r line; do
-	{
-    read -r rule1 rule2 rule3 rule4 <<< $(echo "$line" | awk -F',' '{print $1, $2, $3, $4}')
-	match=$(echo "$packets" | ./firewall.exe "$rule1" | ./firewall.exe "$rule2" | ./firewall.exe "$rule3" | ./firewall.exe "$rule4")
-	matchs+=("$match")
-	}&
+	
+    rule1=$(echo "$line" | awk -F',' '{print $1}')
+    rule2=$(echo "$line" | awk -F',' '{print $2}')
+    rule3=$(echo "$line" | awk -F',' '{print $3}')
+    rule4=$(echo "$line" | awk -F',' '{print $4}')
+    match=$(echo "$packets" | ./firewall.exe "$rule1" | ./firewall.exe "$rule2" | ./firewall.exe "$rule3" | ./firewall.exe "$rule4")
+        matchs+="${match}"$'\n'
+	#echo "$match"
+	#echo -e "\n\nnewnewnew\n\n"
+    
 done <<< "$rules"
 
 #for all bg processes will finish
-wait
+#wait
 
-output=$( printf "%s\n" "${matchs[@]}")
+#echo -e "\n\n!!!!!~~~~~~~~~~~!!!!!!!!!!\n\n"
+#echo "$matchs" | wc -l
 
-echo "$output" | sort -u 
+#output=$(printf "%s\n" "${matchs[@]}")
 
+sorted=$(echo "$matchs" | sort | uniq | sed -e 's/ //g' -e '/^ *$/d')
+
+echo "$sorted"
 
 
 #for every complex rule the call move in pipe

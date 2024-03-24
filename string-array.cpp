@@ -35,7 +35,7 @@ String& StringArray::operator[](int index){
         return array[index]->as_string();
     } else {
         // Handle error gracefully, such as throwing an exception or returning a default value
-	    std::cout << "\n\n index:" << index << "\narr size:" << array.size() << "\n\n\n" <<  std::endl;
+	    std::cout << "\n\n!!!!!!!!!!!\n\n index:" << index << "\narr size:" << array.size() << "\n\n\n" <<  std::endl;
 	throw std::out_of_range("Index out of range or pointer is null");
     }
 
@@ -43,7 +43,14 @@ String& StringArray::operator[](int index){
 
 String& StringArray::operator[](int index) const{
 
-    return array[index]->as_string();
+    if (index < array.size() && array[index] != nullptr) {
+        return array[index]->as_string();
+    } else {
+        // Handle error gracefully, such as throwing an exception or returning a default value
+            std::cout << "\n\n!!!!!!!!!!!\n\n index:" << index << "\narr size:" << array.size() << "\n\n\n" <<  std::endl;
+        throw std::out_of_range("Index out of range or pointer is null");
+    }
+
 }
 
 
