@@ -7,7 +7,7 @@
 
 #include "generic-string.h"
 #include <vector>
-
+#include <cstddef>
 
 class StringArray{
 
