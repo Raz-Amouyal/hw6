@@ -61,11 +61,11 @@ void printBits(int num) {
 
 void trimLocal(std::string& s)
 {
-    int start = s.find_first_not_of(' ');
+    size_t start = s.find_first_not_of(' ');
     if (start > 0){
         s.erase(0, start);
     }
-    int end = s.find_last_not_of(' ');
+    size_t end = s.find_last_not_of(' ');
     if (end < s.length() -1 ){
         s.erase(end + 1);
     }
