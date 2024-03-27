@@ -31,7 +31,7 @@ void StringArray::addElem(GenericString* ptr){
 }
 
 
-String& StringArray::operator[](int index){
+String& StringArray::operator[](size_t index){
     if (index < array.size() && array[index] != nullptr) {
         return array[index]->as_string();
     } else {
@@ -42,7 +42,7 @@ String& StringArray::operator[](int index){
 
 }
 
-String& StringArray::operator[](int index) const{
+String& StringArray::operator[](size_t index) const{
 
     if (index < array.size() && array[index] != nullptr) {
         return array[index]->as_string();
