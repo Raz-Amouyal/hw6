@@ -23,9 +23,9 @@ public:
 
     void addElem(GenericString* ptr);
 
-    String& operator[](int index);
+    String& operator[](size_t index);
 
-    String& operator[](int index) const;
+    String& operator[](size_t index) const;
 
     //GenericString& operator=(int index);    //need to implement
 
