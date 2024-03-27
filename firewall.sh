@@ -21,7 +21,7 @@ rules=$(sed -e 's/#.*//' -e '/^ *$/d' "$rules_file")
 #echo -e "\n\n~~~~~PACKETS~~~~~~~\n\n\nRULES\n\n$rules"
 matchs=""
 
-while IFS= read -r line; do
+while read -r line; do
 	
     rule1=$(echo "$line" | awk -F',' '{print $1}')
     rule2=$(echo "$line" | awk -F',' '{print $2}')
