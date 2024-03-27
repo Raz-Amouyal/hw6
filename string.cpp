@@ -112,11 +112,11 @@ int String::to_integer() const
 
 
 String& String::trim(){
-    int start = data.find_first_not_of(SPACE);
+    size_t start = data.find_first_not_of(SPACE);
     if (start > 0){
         data.erase(0, start);
     }
-    int end = data.find_last_not_of(SPACE);
+    size_t end = data.find_last_not_of(SPACE);
     if (end < data.length() -1){
         data.erase(end + 1);
     }
