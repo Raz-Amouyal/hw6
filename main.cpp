@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <cstring>
+#include <cstddef>
 
 #include "input.h"
 #include "generic-field.h"
@@ -43,7 +44,7 @@ public:
         std::cout << std::endl;
     }
 };
-
+/*
 void printBits(int num) {
     // Size of int in bits
     int numBits = sizeof(int) * 8;
@@ -57,15 +58,15 @@ void printBits(int num) {
         mask >>= 1; // Shift mask to the right
     }
     std::cout << std::endl;
-}
+}*/
 
 void trimLocal(std::string& s)
 {
-    int start = s.find_first_not_of(' ');
+    size_t start = s.find_first_not_of(' ');
     if (start > 0){
         s.erase(0, start);
     }
-    int end = s.find_last_not_of(' ');
+    size_t end = s.find_last_not_of(' ');
     if (end < s.length() -1 ){
         s.erase(end + 1);
     }
