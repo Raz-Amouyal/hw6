@@ -7,7 +7,7 @@ fi
 
 rules_file="$1"
 #echo "$rules_file"
-if [[ ! -e $PWD/$rules_file ]]; then
+if [[ ! -e $rules_file ]]; then
 	echo "rules file not found!" >&2
 	exit 1
 fi
